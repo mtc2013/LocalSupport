@@ -38,6 +38,7 @@ group :test do
   gem 'uri-handler'
   gem 'selenium'
   gem 'selenium-client'
+  gem 'puffing-billy'
 end
 
 group :production do
