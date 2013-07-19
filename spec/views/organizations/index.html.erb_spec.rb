@@ -34,7 +34,9 @@ describe "organizations/index.html.erb", :js => true do
     rendered.should have_selector "form input[type='submit']"
     rendered.should have_selector "form input[value='search']"
     rendered.should have_selector "form select[name='category[id]']"
-    rendered.should have_selector "form select[name='category[id]'] option[value='']"
+    rendered.should have_selector "form select[name='category[id]'] option[value='']" do |all_select|
+      expect(all_select).to contain("All")
+    end
     rendered.should have_selector "form select[name='category[id]'] option[value='1']"
     rendered.should have_selector "form select[name='category[id]'] option[value='2']"
   end
