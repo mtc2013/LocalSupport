@@ -1,10 +1,10 @@
 LocalSupport::Application.routes.draw do
   devise_for :users
 
-  match 'organizations/search' => 'organizations#search'
-  match 'pages/disclaimer' => 'pages#disclaimer'
-  match 'pages/aboutus' => 'pages#aboutus'
-  match 'pages/contact' => 'pages#contact'
+  match 'organizations/search' => 'organizations#search', via: [:get]
+  match 'pages/disclaimer' => 'pages#disclaimer', via: [:get]
+  match 'pages/aboutus' => 'pages#aboutus', via: [:get]
+  match 'pages/contact' => 'pages#contact', via: [:get]
   resources :organizations
 
   # The priority is based upon order of creation:

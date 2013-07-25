@@ -10,9 +10,8 @@ class Category < ActiveRecord::Base
   def self.seed(csv_file)
     csv_text = File.open(csv_file, 'r:ISO-8859-1')
     CSV.parse(csv_text, :headers => true).each do |row|
-      Category.create! :name => row[@@column_mappings[:name]].strip,:charity_commission_id =>
-          row[@@column_mappings[:cc_id]],
-                       :charity_commission_name => row[@@column_mappings[:cc_name]].strip
+      Category.create!( {:name => row[@@column_mappings[:name]].strip,:charity_commission_id => row[@@column_mappings[:cc_id]],
+        :charity_commission_name => row[@@column_mappings[:cc_name]].strip}, :without_protection => true)
     end
   end
 end

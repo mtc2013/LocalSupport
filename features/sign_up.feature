@@ -21,7 +21,7 @@ Scenario: Sign up for an existing user
 Scenario: Sign up for an non-existent user with non-matching password confirmation
   Given I am on the sign up page
   And I sign up as "existent-user2@example.com" with password "pppppppp" and password confirmation "aaaaaaaa"
-  Then I should see "Password doesn't match confirmation"
+  Then I should see "Password confirmation doesn't match"
   And I should not receive an email
   
 @email
