@@ -5,6 +5,7 @@ describe "organizations/edit.html.erb" do
     @organization = assign(:organization, stub_model(Organization,
                                                      :new_record? => false, :donation_info => "http://www.friendly.com/donate"
     ))
+    @tooltips = {'Name'=> 'Enter a strange name'}
   end
 
   it "renders the edit organization form" do
@@ -18,7 +19,7 @@ describe "organizations/edit.html.erb" do
   it "renders the edit organization form with tooltips" do
     view.lookup_context.prefixes = %w[organizations application]
 
-    @tooltips = {'Name'=> 'Enter a strange name'}
+    
 
     render
     tooltip = @tooltips['Name']
