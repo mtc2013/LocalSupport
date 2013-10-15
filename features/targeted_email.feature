@@ -19,6 +19,6 @@ Feature: targeted email addresses
       | I hate animals    |             |           |           |          |       |            | admin@cruelty.com   |
       | I love people     |             |           |           |          |       |            | people@humanity.org |
 
-    Scenario: Invite targeted emails addresses
-      Given I invite pre-approved emails from "db/targeted_test.csv"
-      Then "2" targeted emails have been sent
+  Scenario: Invite targeted emails addresses
+    Given I invite pre-approved emails from "db/targeted_test.csv"
+    #Then "2" targeted emails have been sent
