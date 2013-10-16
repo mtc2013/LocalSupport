@@ -6,7 +6,7 @@ Feature: targeted email addresses
   Background: organizations have been added to database
     Given the following users are registered:
       | email                 | password | admin  | confirmed_at         |  organization |
-      | administrator@dogs.com | pppppppp | false  | 2007-01-01  10:00:00 |  Friendly |
+      | administrator@dogs.com | pppppppp | false  | 2007-01-01  10:00:00 |  I love dogs |
     Given the following organizations exist:
       | name              | description              | address        | postcode | website       | email         |
       | I love dogs       | loves canines            | 34 pinner road | HA1 4HZ  | http://a.com/ | fred@dogs.com |
@@ -21,4 +21,7 @@ Feature: targeted email addresses
 
   Scenario: Invite targeted emails addresses
     Given I invite pre-approved emails from "db/targeted_test.csv"
-    Then "2" targeted emails have been sent
+    Then "2" targeted emails have been sent to:
+    |  recipient_email   |  organization   |
+    |  admin@cats.com    |  I love cats    |
+    |  admin@cruelty.com |  I hate animals |
