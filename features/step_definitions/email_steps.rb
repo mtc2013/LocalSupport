@@ -13,7 +13,7 @@ And /^the email queue is clear$/ do
 end
 
 Then(/^"(.*?)" targeted emails have been sent$/) do |num|
-  ActionMailer::Base.deliveries.size.should eq 2
+  ActionMailer::Base.deliveries.size.should eq num.to_i
   ActionMailer::Base.deliveries.each do |email|
     email.body.should include("This is your invitation!")
   end
