@@ -21,4 +21,4 @@ Feature: targeted email addresses
 
   Scenario: Invite targeted emails addresses
     Given I invite pre-approved emails from "db/targeted_test.csv"
-    #Then "2" targeted emails have been sent
+    Then "2" targeted emails have been sent
