@@ -9,7 +9,7 @@ describe "layouts/_footer3.html.erb" do
   end
 end
 
-describe "layouts/footer3.html.erb" do
+describe "layouts/_footer3.html.erb" do
   it "display the cookies modal dialog to users
 who have not accepted cookies" do
     render

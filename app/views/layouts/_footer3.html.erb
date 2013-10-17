@@ -7,8 +7,7 @@
     <!-- When this modal dialog works, put it in an 'if' branch -->
         <%= render :partial => 'layouts/cookie_modal' %>
         <script type="text/javascript">
-	  $(document).ready(function(){
-          $('#cookiesModal').show();});
+	  $('#cookiesModal').modal({show: true}) ;
         </script>
 
     <% if not cookies_accepted? %>
