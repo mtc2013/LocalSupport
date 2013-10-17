@@ -2,17 +2,16 @@
   <p class="text-right"><small>
     <%= link_to_unless_current 'Contact', page_path('contact') %> |
     <%= link_to_unless_current 'About Us', page_path('about') %>
-    <% if cookies_accepted? %>
-        |
-        <%= link_to "Cookies Policy", "#cookiesModal", :class => "btn", "data-toggle" => "modal" %>
-    <% else %>
-        |
-        <%= link_to_unless_current 'Cookies Policy', "#cookiesModal", "data-toggle" => "modal" %>
+    |
+    <%= link_to "Cookies Policy", "#cookiesModal", "data-toggle" => "modal" %>
+    <!-- When this modal dialog works, put it in an 'if' branch -->
         <%= render :partial => 'layouts/cookie_modal' %>
         <script type="text/javascript">
-            $('#cookiesModal').modal({show: true}) ;
+	  $(document).ready(function(){
+          $('#cookiesModal').show();});
         </script>
 
+    <% if not cookies_accepted? %>
     <% end %>
   </small></p>
 
