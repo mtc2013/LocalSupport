@@ -414,5 +414,14 @@ describe Organization do
       Organization.add_email(fields = CSV.parse('friendly,,,,,,,test@example.org')[0],true)
     end
   end
+  describe "targeting emails" do
+    it 'should send targeted email when org has no existing admin' do
+      org = mock_model("Organization")
+      org.stub(:users => nil, :name => "Friendly")
+      Organization.should_receive(:where).with("UPPER(name) LIKE ? ", "%FRIENDLY%").and_return([org])
+      CustomMailer.should_receive(:send_targeted_invite).with("Friendly", "test@example.org")
+      Organization.send_invite(fields = 'friendly,,,,,,,test@example.org')
+    end
+  end
 
 end

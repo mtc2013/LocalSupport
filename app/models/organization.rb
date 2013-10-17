@@ -159,6 +159,9 @@ class Organization < ActiveRecord::Base
       end
     end
   end
+  def self.send_invite(row)
+
+  end
 
   private
 
