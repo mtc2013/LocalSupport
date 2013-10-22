@@ -13,7 +13,7 @@ LocalSupport::Application.routes.draw do
   resources :pages
   resources :organizations
 
-
+  get 'cookies/allow', to: 'cookie_policy#allow'
   # so that static pages are linked directly instead of via /pages/:id
   get ':id', to: 'pages#show', as: :page
   put ':id', to: 'pages#update', as: :page
