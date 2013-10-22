@@ -1,5 +1,4 @@
 And(/^I have not approved cookie policy$/) do
-  pending
   expect(cookies_accepted?).to eq false
 end
 

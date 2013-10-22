@@ -7,7 +7,6 @@ Feature: Approve cookies
 Background: 
 
 Scenario:
-	Pending 
 	Given I am on the home page
 	And I have not approved cookie policy
 	Then I should see an approve cookie policy message
