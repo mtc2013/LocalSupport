@@ -1,6 +1,9 @@
 LocalSupport::Application.routes.draw do
 
 
+  post "cookies/allow" #, as: :organizations
+  post "cookies/deny"
+
   devise_for :users
 
   match 'organizations/search' => 'organizations#search'
@@ -13,7 +16,6 @@ LocalSupport::Application.routes.draw do
   resources :pages
   resources :organizations
 
-  get 'cookies/allow', to: 'cookie_policy#allow'
   # so that static pages are linked directly instead of via /pages/:id
   get ':id', to: 'pages#show', as: :page
   put ':id', to: 'pages#update', as: :page

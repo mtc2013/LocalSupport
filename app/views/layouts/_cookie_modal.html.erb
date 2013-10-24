@@ -14,8 +14,14 @@
     <% button_to_function "Greeting", "alert('Hello world!')", class: "btn ok" %>
   </div>
   <div class="modal-footer">
-    <button id="reject" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Reject cookies</button>
-    <button id="accept" class="btn btn-primary"data-dismiss="modal" aria-hidden="true">Accept cookies</button>
+    <!--button id="reject" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Reject cookies</button>
+    <button id="accept" class="btn btn-primary"data-dismiss="modal" aria-hidden="true">Accept cookies</button-->
+    <%= form_tag controller: "cookies", action: "allow", method: :post do %>
+        <%= submit_tag 'Allow'  %>
+    <% end %>
+    <%= form_tag controller: "cookies", action: "deny", method: :post do %>
+        <%= submit_tag 'deny'  %>
+    <% end %>
   </div>
 </div>
 
@@ -24,13 +30,14 @@
     $("#accept").click( function()
             {
                 alert('cookies accepted');
-                $.get("/cookies/allow");
+                $.post("/cookies/allow");
             }
     );
 
     $("#reject").click( function()
             {
                 alert('cookies rejected');
+                $.post("/cookies/deny");
             }
     );
 
