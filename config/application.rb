@@ -1,7 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-require 'rack/policy'
+
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -10,8 +10,13 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+
+
 module LocalSupport
   class Application < Rails::Application
+
+
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -48,7 +53,7 @@ module LocalSupport
 
     config.assets.initialize_on_precompile = false
 
-    config.middleware.insert_before ActionDispatch::Cookies, Rack::Policy::CookieLimiter, consent_token: 'rack.policy'
-
   end
+
+
 end

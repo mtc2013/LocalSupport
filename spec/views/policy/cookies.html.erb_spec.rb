@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe "cookies/cookies.html.erb" do
+describe "policy/policy.html.erb" do
   pending "add some examples to (or delete) #{__FILE__}"
 end

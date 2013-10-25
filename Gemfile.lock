@@ -1,10 +1,3 @@
-GIT
-  remote: https://github.com/tochman/rack-policy.git
-  revision: 98dccd78abf5506f1b95ebb8c5165d5e653a4a75
-  specs:
-    rack-policy (0.4.1)
-      rack (~> 1.1)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -281,6 +274,7 @@ GEM
       libv8 (~> 3.16.14.0)
       ref
     thor (0.18.1)
+    threepwood (1.0.1)
     tilt (1.4.1)
     treetop (1.4.15)
       polyglot
@@ -339,7 +333,6 @@ DEPENDENCIES
   minitest (~> 4.7.1)
   newrelic_rpm
   pg
-  rack-policy!
   rack_session_access
   railroady
   rails (= 3.2.14)
@@ -351,6 +344,7 @@ DEPENDENCIES
   simplecov
   sqlite3
   therubyracer
+  threepwood
   turn
   twitter-bootstrap-rails
   uglifier

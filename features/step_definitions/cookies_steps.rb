@@ -14,6 +14,6 @@ And(/^I have approved cookie policy$/) do
 end
 
 Then(/^I should not see an approve cookie policy message$/) do
-  expect(page).to have_no_content("We will ask you to consent to our use of cookies")
+  expect(page).to have_no_content("We will ask you to consent to our use of policy")
 end
 

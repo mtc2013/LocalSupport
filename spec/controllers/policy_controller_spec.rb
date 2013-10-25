@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe CookiesController do
+describe PolicyController do
 
-  describe "GET 'cookies'" do
+  describe "GET 'policy'" do
     it "returns http success" do
-      get 'cookies'
+      get 'policy'
       response.should be_success
     end
   end

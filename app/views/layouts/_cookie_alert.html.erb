@@ -7,6 +7,7 @@
   </small>
   <small><strong>We will ask you to consent to our use of cookies in accordance with the terms of this policy when you first visit our website.
   <strong></strong></small>  </p>
-  <button id="reject" class="btn btn-danger btn-mini" data-dismiss="alert" aria-hidden="true">Reject cookies</button>
-    <button id="accept" class="btn btn-primary btn-mini"data-dismiss="alert" aria-hidden="true">Accept cookies</button>
+  <%= button_to "Allow policy", {:controller => :policy, :action => :cookies_accept}, {:method => :put, :class => "btn btn-primary btn-mini"}%>
+  <%= button_to "Deny policy", {:controller => :policy, :action => :cookies_deny}, {:method => :put, :class => "btn btn-danger btn-mini"}   %>
+  <%= render :text => "Cookies #{cookies.inspect}"%>
 </div>

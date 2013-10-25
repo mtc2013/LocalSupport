@@ -1,8 +1,8 @@
 LocalSupport::Application.routes.draw do
 
 
-  post "cookies/allow" #, as: :organizations
-  post "cookies/deny"
+  put 'cookies_accept' => 'policy#cookies_accept'
+  put 'cookies_deny' => 'policy#cookies_deny'
 
   devise_for :users
 

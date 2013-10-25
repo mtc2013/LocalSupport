@@ -14,12 +14,12 @@
     <% button_to_function "Greeting", "alert('Hello world!')", class: "btn ok" %>
   </div>
   <div class="modal-footer">
-    <!--button id="reject" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Reject cookies</button>
-    <button id="accept" class="btn btn-primary"data-dismiss="modal" aria-hidden="true">Accept cookies</button-->
-    <%= form_tag controller: "cookies", action: "allow", method: :post do %>
+    <!--button id="reject" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Reject policy</button>
+    <button id="accept" class="btn btn-primary"data-dismiss="modal" aria-hidden="true">Accept policy</button-->
+    <%= form_tag controller: "policy", action: "allow", method: :post do %>
         <%= submit_tag 'Allow', :class => "btn btn-primary" %>
     <% end %>
-    <%= form_tag controller: "cookies", action: "deny", method: :post do %>
+    <%= form_tag controller: "policy", action: "deny", method: :post do %>
         <%= submit_tag 'deny', :class => "btn btn-danger"  %>
     <% end %>
   </div>
@@ -29,15 +29,15 @@
 
     $("#accept").click( function()
             {
-                alert('cookies accepted');
-                $.post("/cookies/allow");
+                alert('policy accepted');
+                $.post("/policy/allow");
             }
     );
 
     $("#reject").click( function()
             {
-                alert('cookies rejected');
-                $.post("/cookies/deny");
+                alert('policy rejected');
+                $.post("/policy/deny");
             }
     );
 

@@ -36,19 +36,19 @@
     <%= render 'layouts/footer3' %>
   </div>
 
-  <!--New row for alert -->
+  <!--Row for alert -->
   <div class="row">
-  <div class="span10 offset1">
-    <% if cookies_accepted?%>
-        <h1>cookies accepted</h1>
+    <div class="span10 offset1">
+    <% unless @accepted_cookies%>
+          <%= render :partial => 'layouts/cookie_alert' %>
+
     <% else %>
-        <!-- When this modal dialog works, put it in an 'if' branch -->
-        <%= render :partial => 'layouts/cookie_alert' %>
-
+          <!--TODO: remove cookie inspect code -->
+          <%= render :text => "Cookies #{cookies.inspect}"%>
     <% end %>
-
-  </div>
     </div>
+   </div>
+  <!--End of  row -->
 
 </div>
 </div>

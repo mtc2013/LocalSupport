@@ -85,4 +85,6 @@ gem 'unicorn'
 gem 'redcarpet'
 
 # Rack middleware that makes app compliant with the 'EU ePrivacy Directive'
-gem 'rack-policy', :git => "https://github.com/tochman/rack-policy.git"
+gem 'threepwood'
+
+
