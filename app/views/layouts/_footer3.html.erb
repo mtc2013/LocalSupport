@@ -5,15 +5,6 @@
     |
     <%= link_to "Cookies Policy", "#cookiesModal", "data-toggle" => "modal" %>
 
-    <% if cookies_accepted?%>
-        <h1>cookies accepted</h1>
-        <% else %>
-        <!-- When this modal dialog works, put it in an 'if' branch -->
-        <%= render :partial => 'layouts/cookie_modal' %>
-        <script type="text/javascript">
-            $('#cookiesModal').modal({show: true}) ;
-        </script>
-    <% end %>
   </small></p>
 
 </footer>

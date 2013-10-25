@@ -1,0 +1,19 @@
+<footer class="footer">
+  <p class="text-right"><small>
+    <%= link_to_unless_current 'Contact', page_path('contact') %> |
+    <%= link_to_unless_current 'About Us', page_path('about') %>
+    |
+    <%= link_to "Cookies Policy", "#cookiesModal", "data-toggle" => "modal" %>
+
+    <% if cookies_accepted?%>
+        <h1>cookies accepted</h1>
+    <% else %>
+        <!-- When this modal dialog works, put it in an 'if' branch -->
+        <%= render :partial => 'layouts/cookie_modal' %>
+        <script type="text/javascript">
+            $('#cookiesModal').modal({show: true}) ;
+        </script>
+    <% end %>
+  </small></p>
+
+</footer>

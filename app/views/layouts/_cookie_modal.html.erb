@@ -17,10 +17,10 @@
     <!--button id="reject" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Reject cookies</button>
     <button id="accept" class="btn btn-primary"data-dismiss="modal" aria-hidden="true">Accept cookies</button-->
     <%= form_tag controller: "cookies", action: "allow", method: :post do %>
-        <%= submit_tag 'Allow'  %>
+        <%= submit_tag 'Allow', :class => "btn btn-primary" %>
     <% end %>
     <%= form_tag controller: "cookies", action: "deny", method: :post do %>
-        <%= submit_tag 'deny'  %>
+        <%= submit_tag 'deny', :class => "btn btn-danger"  %>
     <% end %>
   </div>
 </div>
