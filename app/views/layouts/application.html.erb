@@ -12,9 +12,12 @@
 <% flash.each do |name, msg| %>
 <%= content_tag :div, msg, :class => "flash #{name}" %>
 <% end %>
-
 <%= render 'layouts/header' %>
 <div class="container">
+  <div class="row">
+    <div class="row">
+      <div class="span12"></div>
+    </div>
 <div class="row">
   <div class="span6">
     <%= yield :map %>
