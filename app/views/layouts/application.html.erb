@@ -12,7 +12,10 @@
 <% flash.each do |name, msg| %>
 <%= content_tag :div, msg, :class => "flash #{name}" %>
 <% end %>
-<%= render 'layouts/header' %>
+
+
+
+  <%= render 'layouts/header' %>
 <div class="container">
   <div class="row">
     <div class="row">
@@ -45,9 +48,7 @@
     <% unless @accepted_cookies%>
           <%= render :partial => 'layouts/cookie_alert' %>
 
-    <% else %>
-          <!--TODO: remove cookie inspect code -->
-          <%= render :text => "Cookies #{cookies.inspect}"%>
+
     <% end %>
     </div>
    </div>

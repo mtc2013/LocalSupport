@@ -5,9 +5,9 @@ LocalSupport::Application.routes.draw do
   put 'cookies_deny' => 'policy#cookies_deny'
 
   devise_for :users, :controllers => { :sessions => 'sessions' }, :skip => [:sessions] do
-    get 'signin' => 'sessions#new', :as => :new_user_session
-    post 'signin' => 'sessions#create', :as => :user_session
-    get 'signout' => 'sessions#destroy', :as => :destroy_user_session
+    get 'users/sign_in' => 'sessions#new', :as => :new_user_session
+    post 'users/sign_in' => 'sessions#create', :as => :user_session
+    get 'users/sign_out' => 'sessions#destroy', :as => :destroy_user_session
   end
   devise_for :users
 

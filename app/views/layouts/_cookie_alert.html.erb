@@ -9,5 +9,4 @@
   <strong></strong></small>  </p>
   <%= button_to "Allow policy", {:controller => :policy, :action => :cookies_accept}, {:method => :put, :class => "btn btn-primary btn-mini"}%>
   <%= button_to "Deny policy", {:controller => :policy, :action => :cookies_deny}, {:method => :put, :class => "btn btn-danger btn-mini"}   %>
-  <%= render :text => "Cookies #{cookies.inspect}"%>
 </div>
