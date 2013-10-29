@@ -2,6 +2,17 @@ class OrganizationsController < ApplicationController
   # GET /organizations/search
   # GET /organizations/search.json
   before_filter :authenticate_user!, :except => [:search, :index, :show]
+  def resource_name
+    :user
+  end
+
+  def resource
+    @resource ||= User.new
+  end
+
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end
 
   def search
     @query_term = params[:q]
@@ -17,6 +28,7 @@ class OrganizationsController < ApplicationController
   # GET /organizations
   # GET /organizations.json
   def index
+    resource
     @organizations = Organization.order("updated_at DESC")
     @json = gmap4rails_with_popup_partial(@organizations,'popup')
     @category_options = Category.html_drop_down_options

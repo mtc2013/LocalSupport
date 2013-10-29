@@ -26,11 +26,19 @@
             <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login</a>
             <div class="dropdown-menu" style="padding:17px;">
                 <label>Sign in to the system</label>
-                <% form_for("user", :url => user_session_path) do |f| %>
-                <%= f.email_field :email, :autofocus => true, :placeholder => "Username/e-mail"%>  <br>
-                <%= f.password_field :password, {:placeholder => "Password"} %>   <br>
-                <%= f.submit "testing", :class => "btn btn-primary"%>
-                <% end %>
+              <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+                  <div><%= f.label :email %><br />
+                    <%= f.email_field :email, :autofocus => true %></div>
+
+                  <div><%= f.label :password %><br />
+                    <%= f.password_field :password %></div>
+
+                  <% if devise_mapping.rememberable? -%>
+                      <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+                  <% end -%>
+
+                  <div><%= f.submit "Sign in" %></div>
+              <% end %>
               <form><a href="#" title="Some SEO stuff..." data-toggle="collapse" data-target="#register">Sign-up..</a></form>
               <form id="register" class="form collapse">
                 <input name="email" id="inputEmail" type="text" placeholder="Email">
