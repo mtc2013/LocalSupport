@@ -16,7 +16,10 @@ Given the following users are registered:
   | registered_user-3@example.com| pppppppp | false | Friendly     | 2007-01-01  10:00:00 |
 
 Scenario: Sign in for an existing non-admin user unassociated with any organization
-  Given I am on the sign in page
+  Given I am on the home page
+  And I click "Login"
+  And I should see "Sign in to the system"
+  And I should see "testing"
   And I sign in as "registered_user-1@example.com" with password "pppppppp"
   Then I should be on the home page
   And I should see "Signed in as registered_user-1@example.com"

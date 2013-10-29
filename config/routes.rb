@@ -4,11 +4,11 @@ LocalSupport::Application.routes.draw do
   put 'cookies_accept' => 'policy#cookies_accept'
   put 'cookies_deny' => 'policy#cookies_deny'
 
-  devise_for :users, :controllers => { :sessions => 'sessions' }, :skip => [:sessions] do
-    get 'users/sign_in' => 'sessions#new', :as => :new_user_session
-    post 'users/sign_in' => 'sessions#create', :as => :user_session
-    get 'users/sign_out' => 'sessions#destroy', :as => :destroy_user_session
-  end
+  #devise_for :users, :controllers => { :sessions => 'sessions' }, :skip => [:sessions] do
+  #  get 'users/sign_in' => 'sessions#new', :as => :new_user_session
+  #  post 'users/sign_in' => 'sessions#create', :as => :user_session
+  #  get 'users/sign_out' => 'sessions#destroy', :as => :destroy_user_session
+  #end
   devise_for :users
 
   match 'organizations/search' => 'organizations#search'
