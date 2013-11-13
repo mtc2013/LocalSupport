@@ -75,7 +75,7 @@ group :test do
 end
 
 gem 'therubyracer'
-gem 'gmaps4rails'
+gem 'gmaps4rails', '2.0.5'
 #gem 'mongrel'
 gem 'kaminari'
 gem 'unicorn'
