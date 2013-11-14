@@ -44,6 +44,7 @@ end
 group :production do
   gem 'pg'
   gem 'newrelic_rpm'
+  gem 'rails_12factor'
 end
 
 
@@ -75,7 +76,7 @@ group :test do
 end
 
 gem 'therubyracer'
-gem 'gmaps4rails', '2.0.5'
+gem 'gmaps4rails', '1.5.6'
 #gem 'mongrel'
 gem 'kaminari'
 gem 'unicorn'
