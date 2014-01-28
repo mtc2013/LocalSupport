@@ -13,7 +13,7 @@
                 if (!menu.hasClass('open')) {
                     menu.addClass('open')
                 }
-//                $.session.set('org_id', that.attr('data-org_id'));
+                $.session.set('org_id', that.attr('data-org_id'));
                 return false;
             }
         });

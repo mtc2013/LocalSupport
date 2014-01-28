@@ -16,6 +16,7 @@ describe('This is my Organization button', function() {
         nav  = $('.nav-collapse');
         menu = $('#menuLogin');
         spyCollapse = spyOn($.fn, 'collapse').andCallThrough();
+        spyOrgId = spyOn($.session, 'set').andCallThrough();
         spyOnEvent(nav, 'show');
         spyOnEvent(timo, 'click');
         timo.TIMO();
@@ -26,7 +27,10 @@ describe('This is my Organization button', function() {
         expect(menu.length).not.toBe(0);
     });
     describe('when not logged in', function() {
-        beforeEach(function() { timo.attr('data-signed_in', 'false') });
+        beforeEach(function() { 
+          timo.attr('data-signed_in', 'false') 
+          timo.attr('data-org_id', '10') 
+        });
         it('click propagation should be stopped', function() {
             timo.click();
             expect('click').toHaveBeenStoppedOn(timo);
@@ -44,6 +48,9 @@ describe('This is my Organization button', function() {
             });
             it('menu changes attributes', function() {
                 expect(menu).toHaveClass('open');
+            });
+            it('$.session will call set correctly', function() {
+                expect(spyOrgId).toHaveBeenCalledWith('org_id', '10');
             });
         });
         describe('when login menu is open and TIMO is clicked', function() {
