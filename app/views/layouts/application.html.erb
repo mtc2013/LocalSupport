@@ -4,7 +4,6 @@
   <title><%= content_for?(:title) ? yield(:title) : "Harrow Community Network" %> </title>
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
-  <%= javascript_include_tag "/vendor/plugins/jquery_session" %>
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
   <!--this is where the gmaps scripts are added-->
