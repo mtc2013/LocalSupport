@@ -4,14 +4,14 @@ Feature: This is my organization
   I want to be able to request for the privilege through our organization page
 
   Background:
-    Given the following users are registered:
-       | email              | password       | admin | confirmed_at        | organization     | pending_organization |
-       | nonadmin@myorg.com | mypassword1234 | false | 2008-01-01 00:00:00 |                  |                      |
-       | pending@myorg.com  | mypassword1234 | false | 2008-01-01 00:00:00 |                  | The Organization     |
-       | admin@myorg.com    | mypassword1234 | false | 2008-01-01 00:00:00 | The Organization |                      |
-    And the following organizations exist:
-       | name             | address        |
-       | The Organization | 83 pinner road |
+    Given the following organizations exist:
+      | name             | address        |
+      | The Organization | 83 pinner road |
+    And the following users are registered:
+      | email              | password       | admin | confirmed_at        | organization     | pending_organization |
+      | nonadmin@myorg.com | mypassword1234 | false | 2008-01-01 00:00:00 |                  |                      |
+      | pending@myorg.com  | mypassword1234 | false | 2008-01-01 00:00:00 |                  | The Organization     |
+      | admin@myorg.com    | mypassword1234 | false | 2008-01-01 00:00:00 | The Organization |                      |
     And cookies are approved
 
   Scenario: I am a signed in user who requests to be admin for my organization
