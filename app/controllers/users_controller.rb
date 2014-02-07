@@ -12,12 +12,12 @@ class UsersController < ApplicationController
       msg = "You have requested admin status for #{org.name}"
       path = organization_path(params[:organization_id])
     else
-      authorize
+      return unless authorize
       attribs = { organization_id: params[:pending_organization_id], pending_organization_id: nil }
       msg = "You have approved #{user.email}."
       path = users_path
     end
-    user.update_attributes(attribs)
+    user.update_attributes!(attribs)
     flash[:notice] = msg
     redirect_to(path)
   end
