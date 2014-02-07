@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       path = organization_path(params[:organization_id])
     else
       return unless authorize
-      attribs = { organization_id: params[:pending_organization_id], pending_organization_id: nil }
+      attribs = { organization_id: user.pending_organization_id, pending_organization_id: nil }
       msg = "You have approved #{user.email}."
       path = users_path
     end

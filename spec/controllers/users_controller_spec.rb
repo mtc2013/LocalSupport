@@ -6,8 +6,8 @@ describe UsersController do
       request.env['warden'].stub :authenticate! => admin_user
       controller.stub(:current_user).and_return(admin_user)
 
-      @nonadmin_user = double('User', admin?: false, email: 'joetheeskimo@gmail.com')
-      User.should_receive(:find_by_id).and_return(@nonadmin_user)
+      @nonadmin_user = double('User', admin?: false, email: 'joetheeskimo@gmail.com', pending_organization_id: 6)
+      User.should_receive(:find_by_id).with('4').and_return(@nonadmin_user)
     end
     context 'user requesting pending status to be admin of charity' do
       it 'redirects to the show page for org and flash success' do
