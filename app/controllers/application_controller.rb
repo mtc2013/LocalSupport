@@ -42,7 +42,9 @@ class ApplicationController < ActionController::Base
 
   # http://railscasts.com/episodes/20-restricting-access
   def authorize
-    unless admin?
+    if admin?
+      true
+    else
       flash[:error] = 'You must be signed in as an admin to perform this action!'
       redirect_to '/'
       false
