@@ -7,16 +7,17 @@
 // https://github.com/seyhunak/twitter-bootstrap-rails/blob/master/app/assets/javascripts/twitter/bootstrap/bootstrap-collapse.js#L69
 
 describe('This is my Organization button', function() {
-    var timo, nav, menu, spyCollapse;
+    var timo, nav, menu, spyCollapse, append;
     beforeEach(function() {
         setFixtures('<a id="TIMO">This is my organization</a>');
         appendSetFixtures(sandbox({class:'nav-collapse'}));
         appendSetFixtures('<li id="menuLogin" class="dropdown"></li>');
+        appendSetFixtures('<form id="loginForm"></form>');
         timo = $('#TIMO');
         nav  = $('.nav-collapse');
         menu = $('#menuLogin');
         spyCollapse = spyOn($.fn, 'collapse').andCallThrough();
-        spyOrgId = spyOn($.session, 'set').andCallThrough();
+        //spyOrgId = spyOn($.session, 'set').andCallThrough();
         spyOnEvent(nav, 'show');
         spyOnEvent(timo, 'click');
         timo.TIMO();
@@ -35,9 +36,17 @@ describe('This is my Organization button', function() {
             timo.click();
             expect('click').toHaveBeenStoppedOn(timo);
         });
-        it('the session will be set to have the organization id', function() {
-            timo.click();
-            expect(spyOrgId).toHaveBeenCalledWith('org_id', '10');
+        it('inserts private field for organization user is claiming', function(){
+           append = spyOn($.fn, 'append').andCallThrough();
+           timo.click();
+           expect(append).toHaveBeenCalled();
+           expect($("#loginForm > div > input[name*='user[pending_organization_id]'][value*='10']").length).toBe(1);
+        });
+        it('does not insert private field if it is already present', function(){
+           appendSetFixtures('<form id="loginForm"><div><input name="user[pending_organization_id]" type="hidden" value="110" /></div>');
+           append = spyOn($.fn, 'append').andCallThrough();
+           timo.click();
+           expect(append).not.toHaveBeenCalled();
         });
 
         describe('when login menu is closed and TIMO is clicked', function() {

@@ -13,7 +13,11 @@
                 if (!menu.hasClass('open')) {
                     menu.addClass('open')
                 }
-                $.session.set('org_id', that.attr('data-org_id'));
+                if ($("#loginForm > div > input[name*='user[pending_organization_id]']").length == 0){
+                  var org_id = $("#TIMO").attr('data-org_id')
+                  $("#loginForm").append("<div><input type = 'hidden' name = 'user[pending_organization_id]' value = '".concat(org_id).concat("'></input></div>"));
+                }
+
                 return false;
             }
         });
