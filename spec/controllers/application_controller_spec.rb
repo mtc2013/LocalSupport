@@ -1,7 +1,24 @@
 require 'spec_helper'
 
 describe ApplicationController do
-  describe 'after_sign_in_path' do
+  describe '#after_sign_in_path_for' do
+    it 'should return organization path when user is associated with organization and has not previously visited the site' do
+      controller = ApplicationController.new
+      controller.stub(:store_location)
+      controller.stub(:session).and_return({ :previous_url => nil })
+      controller.stub(:organization_path).and_return '/organization/1'
+      user = double('User')
+      org = double('Organization')
+      org.stub(:id).and_return 1
+      user.stub(:organization).and_return org
+      controller.stub(:current_user).and_return user
+      controller.stub(:root_path).and_return '/'
+
+      controller.after_sign_in_path_for(user).should eq '/organization/1'
+    end
+  end
+
+  describe 'checking previous request paths stored in session' do
     controller do
       def custom
         render :text => "custom called"
@@ -27,6 +44,12 @@ describe ApplicationController do
       end
       it 'when called by ajax' do
         request.stub(:xhr?).and_return(true)
+        get :custom
+        session[:previous_url].should be_nil
+      end
+
+      it 'when called from /users/password/edit' do
+        request.stub(:path).and_return("/users/password/edit")
         get :custom
         session[:previous_url].should be_nil
       end
