@@ -18,7 +18,6 @@ group :development, :test do
   gem 'execjs'
   gem 'aruba'
   gem 'rack_session_access'
-  gem 'simplecov', :require => false
   gem 'jasmine'
   gem 'jasmine-jquery-rails'
 end
@@ -60,6 +59,8 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 end
 
+gem 'font-awesome-rails'
+
 gem 'jquery-rails'
 
 # Use unicorn as the web server
@@ -84,9 +85,6 @@ gem 'unicorn'
 
 # To use markdown in editing static pages
 gem 'redcarpet'
-
-# Adding font awesome
-gem 'font-awesome-rails'
 
 # validating organization website URLs
 gem 'url_validator'
