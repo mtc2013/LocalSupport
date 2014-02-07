@@ -2,22 +2,21 @@ require 'spec_helper'
 describe UsersController do
   describe 'PUT update user-organization status' do
     before(:each) do
-      admin_user = double("User")
-      admin_user.stub(:admin?).and_return(true)
+      admin_user = double('User', admin?: true)
       request.env['warden'].stub :authenticate! => admin_user
       controller.stub(:current_user).and_return(admin_user)
-      @nonadmin_user = double("User")
-      User.stub(:find_by_id).with("4").and_return(@nonadmin_user)
+
+      @nonadmin_user = double('User', admin?: false)
+      User.stub(:find_by_id).with('4').and_return(@nonadmin_user)
       @nonadmin_user.stub(:pending_organization_id=).with('5')
-      @nonadmin_user.stub(:admin?).and_return(false)
       @nonadmin_user.stub(:save!)
-      @org = double("Organization")
-      @org.stub(:name).and_return('Red Cross')
+
+      @org = double('Organization', name: 'Red Cross')
       Organization.stub(:find).and_return(@org)
     end
     context 'user requesting pending status to be admin of charity' do
       it 'should update the pending organization id to nested org id' do
-        User.should_receive(:find_by_id).with("4").and_return(@nonadmin_user)
+        User.should_receive(:find_by_id).with('4').and_return(@nonadmin_user)
         @nonadmin_user.should_receive(:update_attributes!)
         put :update, id: 4, organization_id: 5
       end
@@ -29,22 +28,18 @@ describe UsersController do
       it 'should display that a user has requested admin status for nested org' do
         @nonadmin_user.should_receive(:update_attributes!)
         put :update, id: 4, organization_id: 5
-        expect(flash[:notice]).to have_content("You have requested admin status for #{@org.name}")
+        flash[:notice].should have_content "You have requested admin status for #{@org.name}"
       end
     end
     context 'admin promoting user to charity admin' do
-      before(:each) do
-        @nonadmin_user.stub(:promote_to_org_admin)
-        @nonadmin_user.stub(:email).and_return('stuff@stuff.com')
-      end
       it 'non-admins get refused' do
         controller.stub(:current_user).and_return(@nonadmin_user)
         @nonadmin_user.should_not_receive(:update_attributes!)
         put :update, {:id => '4'}
-        response.should redirect_to "/"
+        response.should redirect_to '/'
       end
 
-      it "calls a model method to add user's organziation and remove user's pending organization" do
+      it "calls a model method to add user's organization and remove user's pending organization" do
         @nonadmin_user.should_receive(:update_attributes!)
         @nonadmin_user.should_receive(:promote_to_org_admin)
         put :update, {:id => '4'}
