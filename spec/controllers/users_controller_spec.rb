@@ -6,7 +6,7 @@ describe UsersController do
       request.env['warden'].stub :authenticate! => admin_user
       controller.stub(:current_user).and_return(admin_user)
 
-      @nonadmin_user = double('User', admin?: false)
+      @nonadmin_user = double('User', admin?: false, email: 'joetheeskimo@gmail.com')
       User.stub(:find_by_id).with('4').and_return(@nonadmin_user)
       @nonadmin_user.stub(:pending_organization_id=).with('5')
       @nonadmin_user.stub(:save!)
