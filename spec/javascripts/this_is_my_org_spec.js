@@ -28,13 +28,18 @@ describe('This is my Organization button', function() {
     });
     describe('when not logged in', function() {
         beforeEach(function() { 
-          timo.attr('data-signed_in', 'false') 
+          timo.attr('data-signed_in', 'false');
           timo.attr('data-org_id', '10') 
         });
         it('click propagation should be stopped', function() {
             timo.click();
             expect('click').toHaveBeenStoppedOn(timo);
         });
+        it('the session will be set to have the organization id', function() {
+            timo.click();
+            expect(spyOrgId).toHaveBeenCalledWith('org_id', '10');
+        });
+
         describe('when login menu is closed and TIMO is clicked', function() {
             beforeEach(function() { timo.click() });
             it('$.fn.TIMO will call collapse("show")', function() {
@@ -48,9 +53,6 @@ describe('This is my Organization button', function() {
             });
             it('menu changes attributes', function() {
                 expect(menu).toHaveClass('open');
-            });
-            it('$.session will call set correctly', function() {
-                expect(spyOrgId).toHaveBeenCalledWith('org_id', '10');
             });
         });
         describe('when login menu is open and TIMO is clicked', function() {

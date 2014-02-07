@@ -40,7 +40,7 @@ Feature: This is my organization
     Then I should see "This is my organization"
     When I click id "TIMO"
     Then I should be on the charity page for "The Organization"
-    When I sign in as ""nonadmin@myorg.com"" with password "mypassword1234"
+    When I sign in as "nonadmin@myorg.com" with password "mypassword1234"
     Then I should be on the charity page for "The Organization"
     And "nonadmin@myorg.com"'s request status for "The Organization" should be updated appropriately
 
@@ -50,7 +50,7 @@ Feature: This is my organization
     Then I should see "This is my organization"
     When I click id "TIMO"
     When I click "toggle_link"
-    And I sign up as "normal_user@myorg.com"" with password "pppppppp" and password confirmation "pppppppp"
+    And I sign up as "normal_user@myorg.com" with password "pppppppp" and password confirmation "pppppppp"
     Then I should be on the home page
     And I should see "A message with a confirmation link has been sent to your email address. Please open the link to activate your account."
     Then I should be on the charity page for "The Organization"

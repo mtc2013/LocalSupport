@@ -7,17 +7,19 @@ class UsersController < ApplicationController
   def update
     user = User.find_by_id(params[:id])
     if params[:organization_id]
-      user.pending_organization_id = params[:organization_id]
-      user.save!
+      attribs = { pending_organization_id: params[:organization_id] }
       org = Organization.find(params[:organization_id])
-      flash[:notice] = "You have requested admin status for #{org.name}"
-      redirect_to(organization_path(params[:organization_id]))
+      msg = "You have requested admin status for #{org.name}"
+      path = organization_path(params[:organization_id])
     else
-      redirect_to :status => 404 and return unless current_user.admin?
-      user.promote_to_org_admin
-      flash[:notice] = "You have approved #{user.email}."
-      redirect_to(users_path)
+      authorize
+      attribs = { organization_id: params[:pending_organization_id], pending_organization_id: nil }
+      msg = "You have approved #{user.email}."
+      path = users_path
     end
+    user.update_attributes(attribs)
+    flash[:notice] = msg
+    redirect_to(path)
   end
 
   def index
