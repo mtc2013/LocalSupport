@@ -29,7 +29,7 @@ describe('This is my Organization button', function () {
         beforeEach(function () {
             timo.attr('data-signed_in', 'false');
             timo.attr('data-org_id', '10');
-            spyCollapse = spyOn($.fn, 'collapse').andCallThrough();
+            spyCollapse = spyOn($.fn, 'collapse').and.callThrough();
             spyOnEvent(nav, 'show');
         });
         it('click propagation should be stopped', function () {
@@ -40,7 +40,7 @@ describe('This is my Organization button', function () {
             var login, POI;
             beforeEach(function() {
                 login = $('#loginForm');
-                spyOn($.fn, 'append').andCallThrough();
+                spyOn($.fn, 'append').and.callThrough();
                 POI = 'user[pending_organization_id]'
             });
             it('inserts private field for organization user is claiming', function () {
