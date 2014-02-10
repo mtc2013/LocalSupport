@@ -40,7 +40,6 @@ describe('This is my Organization button', function () {
             var login, POI;
             beforeEach(function() {
                 login = $('#loginForm');
-                spyOn($.fn, 'append').and.callThrough();
                 POI = 'user[pending_organization_id]'
             });
             it('inserts private field for organization user is claiming', function () {
@@ -48,9 +47,10 @@ describe('This is my Organization button', function () {
                 expect(login.children('input[name="'+POI+'"]').length).toEqual(1)
             });
             it('does not insert private field if it is already present', function () {
+                expect(login.children('input[name="'+POI+'"]').length).toEqual(0)
                 timo.click();
                 timo.click();
-                expect($.fn.append.calls.count()).toEqual(1);
+                expect(login.children('input[name="'+POI+'"]').length).toEqual(1)
             });
         });
         describe('when login menu is closed and TIMO is clicked', function () {
