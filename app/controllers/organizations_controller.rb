@@ -92,7 +92,9 @@ class OrganizationsController < ApplicationController
 
   private
   def gmap4rails_with_popup_partial(item, partial)
-    item.to_gmaps4rails  do |org, marker|
+    Gmaps4rails.build_markers(item)  do |org, marker|
+      marker.lat org.latitude
+      marker.lng org.longitude
       marker.infowindow render_to_string(:partial => partial, :locals => { :@org => org})
     end
   end
