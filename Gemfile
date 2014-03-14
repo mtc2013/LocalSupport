@@ -65,6 +65,7 @@ gem 'font-awesome-rails'
 
 gem 'jquery-rails'
 gem 'bootstrap_sortable_rails', '~> 0.1.3'
+gem 'underscore-rails'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -81,7 +82,7 @@ group :test do
 end
 
 gem 'therubyracer'
-gem 'gmaps4rails'
+gem 'gmaps4rails', '~>2.1.2'
 #gem 'mongrel'
 gem 'kaminari'
 gem 'unicorn'

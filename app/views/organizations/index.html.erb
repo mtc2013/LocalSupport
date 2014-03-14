@@ -1,14 +1,3 @@
-<%= form_tag("/organizations/search", :method => "get") do %>
-  <%= label_tag(:q, "Select Category:") %>
-  <%= select("category", "id", @category_options, { :include_blank => 'All' },
-             { :style => 'margin-bottom: 5px;' }) %>
-  <%= submit_tag "Submit", { :class => 'btn btn-info',
-                             :style => 'margin-bottom: 5px;' } %>
-  <%= text_field_tag(:q, @query_term || '',
-                     { :style => 'margin-bottom: 5px; width: 240px;',
-                       :placeholder => "optional search name/description" }) %>
-<% end %>
-
 <div id="orgs_scroll" style="height:340px;width:100%;border:1px solid #ccc;overflow:scroll;">
   <div class="table table-bordered">
     <table>
@@ -33,10 +22,20 @@
 </div>
 
 <% content_for :map do %>
-  <%= gmaps("map_options" => { "auto_adjust" => false,
-                               "auto_zoom" => true,
-                               "center_latitude" => 51.5978,
-                               "center_longitude" => -0.3370,
-                               "zoom" => 12 },
-            "markers"     => { "data" => @json }) %>
+    <div style='width: 800px;'>
+      <div id="map" style='width: 800px; height: 400px;'></div>
+    </div>
+    <script type="text/javascript">
+        handler = Gmaps.build('Google');
+        handler.buildMap({
+                    provider: {
+                        zoom: 14,
+                        center: new google.maps.LatLng(51.580697,-0.34212),
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    },
+                    internal: {id: 'map'}},
+                function () {
+                    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+                });
+    </script>
 <% end %>
