@@ -33,10 +33,11 @@ describe OrganizationsController do
 
   describe "GET search" do
 
+    let(:json) { 'my markers' }
+    let(:result) { [double_organization] }     
+    let(:category) { double('Category') }
+
     context 'setting appropriate view vars for all combinations of input' do
-      let(:json) { 'my markers' }
-      let(:result) { [double_organization] }
-      let(:category) { double('Category') }
       before(:each) do
         result.should_receive(:to_gmaps4rails).and_return(json)
         result.stub_chain(:page, :per).and_return(result)
@@ -96,34 +97,39 @@ describe OrganizationsController do
       end
     end
     # TODO figure out how to make this less messy
-    it "assigns to flash.now but not flash when search returns no results" do
-      double_now_flash = double("FlashHash")
-      result = []
+    def make_query_return_no_results (query, cat_id)
       result.should_receive(:empty?).and_return(true)
       result.stub_chain(:page, :per).and_return(result)
-      Organization.should_receive(:search_by_keyword).with('no results').and_return(result)
-      result.should_receive(:filter_by_category).with('1').and_return(result)
-      category = double('Category')
-      Category.should_receive(:find_by_id).with("1").and_return(category)
-      ActionDispatch::Flash::FlashHash.any_instance.should_receive(:now).and_return double_now_flash
-      ActionDispatch::Flash::FlashHash.any_instance.should_not_receive(:[]=)
-      double_now_flash.should_receive(:[]=).with(:alert, SEARCH_NOT_FOUND)
-      get :search, :q => 'no results', "category" => {"id" => "1"}
+      Organization.should_receive(:search_by_keyword).with(query).and_return(result)
+      result.should_receive(:filter_by_category).with(cat_id).and_return(result)
     end
-
-    it "does not set up flash nor flash.now when search returns results" do
-      result = [double_organization]
-      json='my markers'
+    def make_query_return_results (query, cat_id)
       result.should_receive(:to_gmaps4rails).and_return(json)
       result.should_receive(:empty?).and_return(false)
       result.stub_chain(:page, :per).and_return(result)
-      Organization.should_receive(:search_by_keyword).with('some results').and_return(result)
-      result.should_receive(:filter_by_category).with('1').and_return(result)
-      category = double('Category')
-      Category.should_receive(:find_by_id).with("1").and_return(category)
-      get :search, :q => 'some results', "category" => {"id" => "1"}
-      expect(flash.now[:alert]).to be_nil
-      expect(flash[:alert]).to be_nil
+      Organization.should_receive(:search_by_keyword).with(query).and_return(result)
+      result.should_receive(:filter_by_category).with(cat_id).and_return(result)
+    end
+    context 'when search returns no results' do
+      let(:result) { [] }     
+      let(:subject){double("FlashHash")}
+      it "assigns to flash.now but not flash" do
+        make_query_return_no_results('no results','1')
+        Category.should_receive(:find_by_id).with("1").and_return(category)
+        ActionDispatch::Flash::FlashHash.any_instance.should_receive(:now).and_return subject
+        ActionDispatch::Flash::FlashHash.any_instance.should_not_receive(:[]=)
+        subject.should_receive(:[]=).with(:alert, SEARCH_NOT_FOUND)
+        get :search, :q => 'no results', "category" => {"id" => "1"}
+      end
+    end
+    context 'when search returns results' do
+      it "does not set up flash nor flash.now" do
+        make_query_return_results 'some results', '1'
+        Category.should_receive(:find_by_id).with("1").and_return(category)
+        get :search, :q => 'some results', "category" => {"id" => "1"}
+        expect(flash.now[:alert]).to be_nil
+        expect(flash[:alert]).to be_nil
+      end
     end
   end
 
