@@ -98,17 +98,17 @@ describe OrganizationsController do
     end
     # TODO figure out how to make this less messy
     def make_query_return_no_results (query, cat_id)
-      result.should_receive(:empty?).and_return(true)
+      allow(result).to receive(:empty?).and_return(true)
       result.stub_chain(:page, :per).and_return(result)
-      Organization.should_receive(:search_by_keyword).with(query).and_return(result)
-      result.should_receive(:filter_by_category).with(cat_id).and_return(result)
+      allow(Organization).to receive(:search_by_keyword).with(query).and_return(result)
+      allow(result).to receive(:filter_by_category).with(cat_id).and_return(result)
     end
     def make_query_return_results (query, cat_id)
-      result.should_receive(:to_gmaps4rails).and_return(json)
-      result.should_receive(:empty?).and_return(false)
+      allow(result).to receive(:to_gmaps4rails).and_return(json)
+      allow(result).to receive(:empty?).and_return(false)
       result.stub_chain(:page, :per).and_return(result)
-      Organization.should_receive(:search_by_keyword).with(query).and_return(result)
-      result.should_receive(:filter_by_category).with(cat_id).and_return(result)
+      allow(Organization).to receive(:search_by_keyword).with(query).and_return(result)
+      allow(result).to receive(:filter_by_category).with(cat_id).and_return(result)
     end
     context 'when search returns no results' do
       let(:result) { [] }     
