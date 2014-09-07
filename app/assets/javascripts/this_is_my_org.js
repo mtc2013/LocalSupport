@@ -11,6 +11,7 @@
                 if (!menu.hasClass('open')) {
                     menu.addClass('open')
                 }
+                $('#loginForm div').first().append("<input name='pending_organization_id' type='hidden' value='11'>")
                 return false;
             }
         });
