@@ -69,6 +69,7 @@
                                 <label for="user_password">Confirm password</label>
                                 <![endif]-->
                                 <%= f.password_field :password_confirmation, :id => 'signup_password_confirmation', :placeholder => 'confirm password' %>
+                                <%= f.hidden_field :pending_organization_id , :value => "5" %>
                                 <div><%= f.submit "Sign up", :id => 'signup', :class => "btn btn-primary" %></div>
                             <% end %>
                           </div>
