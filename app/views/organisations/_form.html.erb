@@ -88,6 +88,10 @@
       </tbody>
     </table>
     <br>
+
+    <%= f.select(:categories, options_for_select(Category.all.collect {|p| [ p.name, p.id ] }, 
+                 selected: [Category.find_by_name("Recreation").id]), {},
+                 {:multiple => true, :size => 5}) %>
     <div class="actions">
       <%= f.submit :class => 'btn btn-primary' %>
     </div>
