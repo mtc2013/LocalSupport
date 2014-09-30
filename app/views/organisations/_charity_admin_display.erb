@@ -2,7 +2,7 @@
     <div>This organisation has no admins yet</div>
 <% else %>
   <div>
-  Organisation administrator emails:
+    <h5>Organisation administrator emails</h5>
   <ul>
   <% @organisation.users.each do |admin| %>
   <li><%= admin.email %></li>
