@@ -75,6 +75,7 @@ class OrganisationsController < ApplicationController
   # PUT /organisations/1.json
   def update
     @organisation = Organisation.find(params[:id])
+    debugger
     params[:organisation][:admin_email_to_add] = params[:organisation_admin_email_to_add] if params[:organisation]
     return false unless user_can_edit? @organisation
     cat_ids = params[:organisation][:categories].reject{|s| s.blank?}
