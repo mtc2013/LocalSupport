@@ -75,11 +75,9 @@ class OrganisationsController < ApplicationController
   # PUT /organisations/1.json
   def update
     @organisation = Organisation.find(params[:id])
-    debugger
     params[:organisation][:admin_email_to_add] = params[:organisation_admin_email_to_add] if params[:organisation]
     return false unless user_can_edit? @organisation
-    cat_ids = params[:organisation][:categories].reject{|s| s.blank?}
-    @organisation.categories = cat_ids.map{|id| Category.find_by_id id}
+    @organisation.categories = params[:organisation][:category_ids].map{|id| Category.find_by_id id}
     @organisation.save!
     if @organisation.update_attributes_with_admin(params[:organisation])
       redirect_to @organisation, notice: 'Organisation was successfully updated.'

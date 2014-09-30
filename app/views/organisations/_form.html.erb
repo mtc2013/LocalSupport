@@ -70,15 +70,6 @@
           <input type="checkbox" disabled checked = "checked" value="" class="publish">
         </td>
       </tr>
-            <tr>
-        <td class="borderless">
-          <h5>Edit categories</h5>
-          <%= f.select(:categories, options_for_select(Category.all.collect {|p| [ p.name, p.id ] }, 
-                       selected: @organisation.categories.map(&:id)), {},
-                       {:multiple => true, :size => 5}) %>
-        </td>
-        <td class="borderless"></td>
-      </tr>
       <tr>
         <td class="borderless" >
           <div>
@@ -89,16 +80,24 @@
           <input type="checkbox" class="publish" disabled>
         </td>
       </tr>
+    <tr>
+      <td class="borderless" data-toggle="tooltip" title="Please enter the details of individuals from your organisation you would like to give permission to update your entry. E-mail addresses entered here will not be made public.">
+        <%= text_field_tag 'organisation_admin_email_to_add', value = nil, {:size => 100, class: 'org_form', :cols => "10", :rows => "3", :placeholder => 'You may add an organisation administrator email here', :rows => "3" } %>
+      </td>
+      <td class="borderless"></td>
+    </tr> 
       </tbody>
     </table>
-    <br>
-
+    <h5>Edit categories</h5>
+    <div style="height:10em;width:60%;border:1px solid #ccc;overflow:auto;padding-left:2px;">
     <% for category in Category.find(:all) %>  
       <div>  
         <%= check_box_tag "organisation[category_ids][]", category.id, @organisation.categories.include?(category) %>  
-        <%= category.name %>  
+        <%= label_tag category.name, nil, class: "checkbox inline", style: "padding-left: 2px;" %>  
       </div>  
     <% end %>  
+    </div>
+    <br>
     <div class="actions">
       <%= f.submit :class => 'btn btn-primary' %>
     </div>
