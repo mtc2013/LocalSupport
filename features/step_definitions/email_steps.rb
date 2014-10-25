@@ -40,12 +40,31 @@ end
 
 
 Given(/^I import emails from "(.*?)"$/) do |file|
-  require "rake"
-  @rake = Rake::Application.new
-  Rake.application = @rake
-  Rake.application.rake_require "tasks/emails"
-  Rake::Task.define_task(:environment)
-  @rake['db:import:emails'].invoke(file)
+  fetch_rake_app_for_email_tasks['db:import:emails'].invoke(file)
 end
+
+Given(/^I run the exempt existing users task$/) do
+  fetch_rake_app_for_email_tasks['db:emails:exempt_from_confirmation'].invoke
+end
+
+def fetch_rake_app_for_email_tasks
+  begin
+    @@rake_email
+  rescue
+    require "rake"
+    @@rake_email = Rake::Application.new
+    Rake.application = @@rake_email
+    Rake.application.rake_require "tasks/emails"
+    Rake::Task.define_task(:environment)
+  end
+  @@rake_email
+end
+
+Then(/^all the existing users should be confirmed$/) do
+  User.all.each do |u|
+    expect(u.confirmed_at).not_to be_nil
+  end
+end
+
 
 

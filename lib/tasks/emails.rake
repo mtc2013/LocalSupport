@@ -12,5 +12,14 @@ begin
         puts Organisation.import_emails(args[:file],1000)
       end
     end
+    namespace :emails do
+      desc 'Exempt email addresses from confirmation requirements'
+      task :exempt_from_confirmation do
+        User.all.each do |u|
+          u.confirmed_at = Time.now
+          u.save!
+        end
+      end
+    end
   end
 end
