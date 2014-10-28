@@ -20,7 +20,11 @@ class OrganisationsController < ApplicationController
   # GET /organisations.json
   def index
     @organisations = Organisation.includes(:users).order_by_most_recent
-    @json = gmap4rails_with_popup_partial(@organisations,'popup')
+    #@json = gmap4rails_with_popup_partial(@organisations,'popup')
+    @hash = Gmaps4rails.build_markers(@organisations) do |org, marker|
+      marker.lat org.latitude
+      marker.lng org.longitude
+    end
     @category_options = Category.html_drop_down_options
   end
 

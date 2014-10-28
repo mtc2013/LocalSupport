@@ -1,13 +1,15 @@
 <% content_for :map do %>
-    <%= gmaps("map_options" => {"auto_adjust" => false,
-                                "auto_zoom" => true,
-                                "center_latitude" => 51.5978,
-                                "center_longitude" => -0.3370,
-                                "zoom" => 12},
-              "markers" => {"data" => @json},
-              "options" => {"custom_infowindow_class" => "ls_infobox"}) %>
+    <div>
+      <div id="map"></div>
+    </div>
+
+    <%= javascript_tag do %>
+        handler = Gmaps.build('Google');
+        handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+        markers = handler.addMarkers(<%=raw hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        });
+    <% end %>
 <% end %>
 
-<% content_for :scripts do %>
-    <%= javascript_include_tag 'infobox' %>
-<% end %>
