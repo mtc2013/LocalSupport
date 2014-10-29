@@ -20,6 +20,7 @@ Feature: As a member of the public
   Scenario: See a map of current volunteer opportunities
     Given I visit the volunteer opportunities page
     And cookies are approved
+    Then show me the page
     And I should see "Indian Elders Association" and "Cats Are Us" in the map
 
   Scenario Outline: Volunteer opportunites are listed in map popups
