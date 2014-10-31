@@ -5,10 +5,10 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
   config.mailer_sender = "support@harrowcn.org.uk"
-
+  config.allow_insecure_token_lookup = true
   # Configure the class responsible to send e-mails.
   config.mailer = "CustomDeviseMailer"
-
+  config.secret_key = 'b0085c72b61368c21ebf2f4c286eb34a4046eb2323040759424f0e6e4c8e570f474a782380bc2953e752c20338ec4ef56a6bb737f4ff77e34b3ffffa7ae2bbc1'
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be

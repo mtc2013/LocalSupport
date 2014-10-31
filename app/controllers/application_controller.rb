@@ -3,6 +3,7 @@ require 'custom_errors'
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :store_location, :assign_footer_page_links
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   include CustomErrors
 
@@ -17,6 +18,9 @@ class ApplicationController < ActionController::Base
     )
   end
 
+  def stored_location
+
+  end
   def request_controller_is(white_listed)
     white_listed.include? request.params['controller']
   end
@@ -62,6 +66,12 @@ class ApplicationController < ActionController::Base
     #end
 
     redirect_to request.referer || '/'
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << :pending_organisation_id
   end
 
   private

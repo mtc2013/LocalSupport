@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
+    debugger
     if params[:user]
       session[:pending_organisation_id] = params[:user][:pending_organisation_id]
     end
@@ -9,6 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
     def after_inactive_sign_up_path_for(resource)
       if resource.pending_organisation
         update_message_for_admin_status
+        debugger
         return organisation_path resource.pending_organisation_id 
       else
         send_email_to_site_admin_about_signup resource.email

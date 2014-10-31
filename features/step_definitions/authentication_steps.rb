@@ -117,7 +117,8 @@ end
 
 Given(/^I click on the invitation link in the email to "([^\"]+)"$/) do |email|
   user = User.find_by_email email
-  visit invitation_url(user.invitation_token)
+  debugger
+  #visit invitation_url(user.invitation_token)
   step "I should be on the invitation page"
 end
 

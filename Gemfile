@@ -4,8 +4,8 @@ ruby '1.9.3'
 gem 'rails', '4.0.10'
 #gem 'protected_attributes'
 gem 'pg'
-gem 'devise', '3.0.3'
-gem 'devise_invitable', '~> 1.2.1'
+gem 'devise', '3.1.0'
+gem 'devise_invitable', '~> 1.3.1'
 gem 'heroku-api'
 
 # Bundle edge Rails instead:
