@@ -21,6 +21,7 @@ class ProposedOrganisationEditsController < ApplicationController
   def show
     @organisation = Organisation.find(params[:organisation_id])
     @proposed_organisation_edit = ProposedOrganisationEdit.find(params[:id])
+    @proposed_organisation_edit_presenter = ProposedOrganisationEditPresenter.new @proposed_organisation_edit, current_user
   end
 
   def index
