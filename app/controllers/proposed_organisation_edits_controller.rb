@@ -5,6 +5,7 @@ class ProposedOrganisationEditsController < ApplicationController
   def new
     org = Organisation.find_by_id params[:organisation_id]
     @proposed_organisation_edit = ProposedOrganisationEdit.new organisation: org
+    @proposed_organisation_edit_presenter = ProposedOrganisationEditPresenter.new @proposed_organisation_edit, current_user
   end
 
   def create
