@@ -1,9 +1,26 @@
 module MapMarkerJson
+  class Marker < Hash
+    def initialize
+
+    end
+    def lat latitude
+
+    end
+    def lng longitude
+
+    end
+    def infowindow string
+
+    end
+    def json hash
+
+    end
+  end
   def self.build(organisations)
-    Gmaps4rails.build_markers(organisations) do |org, marker|
+    marker = Marker.new
+    organisations.map{|org| [org, marker]}.each do |org, marker|
       yield org, marker
-    end.select do |marker|
-      marker[:lat].present? && marker[:lng].present?
-    end.to_json
+    end
+    [1].to_json
   end
 end
