@@ -8,8 +8,8 @@ Feature: Orphans UI
       | name               | description    | address        | email             | postcode |
       | The Organisation   | Awesome people | 83 pinner road | no_owner@org.org  | HA1 4HZ  |
       | Org Anonymous      | Awesome people | 007 pinner road | no_owner@org.org  | HA1 4HZ  |
-      #| The Same Email Org | Awesome people | 84 pinner road | no_owner@org.org  | HA1 4HZ  |
-      #| Crazy Email Org    | Awesome people | 30 pinner road | sahjkgdsfsajnfds  | HA1 4HZ  |
+      | The Same Email Org | Awesome people | 84 pinner road | no_owner@org.org  | HA1 4HZ  |
+      | Crazy Email Org    | Awesome people | 30 pinner road | sahjkgdsfsajnfds  | HA1 4HZ  |
       | My Organisation    | Awesome people | 30 pinner road | superadmin@myorg.com   | HA1 4HZ  |
       | Yet Another Org    | Awesome people | 30 pinner road | superadmin@another.org | HA1 4HZ  |
     And the following users are registered:
@@ -21,16 +21,16 @@ Feature: Orphans UI
     And the superadmin invited a user for "Yet Another Org"
 
   # This test is superfluous with email validations in place
-  #@javascript @vcr @billy
-  #Scenario: Super Admin can invite users but only for unique emails
-    #Given cookies are approved
-    #Given I am signed in as a superadmin
-    #And I visit the invite users to become admin of organisations page
-    #And I check the box for "The Organisation"
-    #And I check the box for "The Same Email Org"
-    #When I click id "invite_users"
-    #Then I should see "Invited!" in the response field for "The Organisation"
-    #Then I should see "Error: Email has already been taken" in the response field for "The Same Email Org"
+  @javascript @vcr @billy
+  Scenario: Super Admin can invite users but only for unique emails
+    Given cookies are approved
+    Given I am signed in as a superadmin
+    And I visit the invite users to become admin of organisations page
+    And I check the box for "The Organisation"
+    And I check the box for "The Same Email Org"
+    When I click id "invite_users"
+    Then I should see "Invited!" in the response field for "The Organisation"
+    Then I should see "Error: Email has already been taken" in the response field for "The Same Email Org"
 
   Scenario: Already invited organisations don't appear
     Given cookies are approved
@@ -39,14 +39,14 @@ Feature: Orphans UI
     Then I should not see "Yet Another Org"
 
   # superfluous test
-  #@javascript  
-  #Scenario: Super Admin should be notified when email is invalid
-    #Given cookies are approved
-    #Given I am signed in as a superadmin
-    #And I visit the invite users to become admin of organisations page
-    #And I check the box for "Crazy Email Org"
-    #When I click id "invite_users"
-    #Then I should see "Error: Email is invalid" in the response field for "Crazy Email Org"
+  @javascript
+  Scenario: Super Admin should be notified when email is invalid
+    Given cookies are approved
+    Given I am signed in as a superadmin
+    And I visit the invite users to become admin of organisations page
+    And I check the box for "Crazy Email Org"
+    When I click id "invite_users"
+    Then I should see "Error: Email is invalid" in the response field for "Crazy Email Org"
 
   Scenario: Super Admin can see the preview email
     Given cookies are approved
@@ -94,6 +94,7 @@ Feature: Orphans UI
     And I set my password
     Then I should be on the show page for the organisation named "Yet Another Org"
 
+  @vcr
   Scenario: Invited user email is out of date
     Given cookies are approved
     And I am signed in as a superadmin

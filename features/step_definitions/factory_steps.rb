@@ -13,7 +13,7 @@ Given(/^the following proposed organisations exist:$/) do |table|
     end
     proposed_org = ProposedOrganisation.new create_hash
     proposed_org.users << proposer if proposer
-    proposed_org.save!
+    proposed_org.save!(validate: false)
   end
 end
 
@@ -34,7 +34,7 @@ end
 Given /^the following organisations exist:$/ do |organisations_table|
   organisations_table.hashes.each do |org|
     VCR.use_cassette("#{org["name"]}-#{org["postcode"]}") do
-      Organisation.create! org
+      Organisation.new(org).save(validate: false)
     end
   end
 end

@@ -3,6 +3,7 @@ class AcceptProposedOrganisation
     NOTIFICATION_SENT = "Notification sent"
     INVITATION_SENT = "Invitation sent"
     INVALID_EMAIL = "Invalid Email"
+    INVALID_ORG_EMAIL = "Invalid Org Email"
     NO_EMAIL = "No email"
     OTHER_ERROR = "Other Error"
 
@@ -21,6 +22,9 @@ class AcceptProposedOrganisation
   end
 
   def run
+    unless @proposed_org.valid?
+      return Response.new(Response::INVALID_EMAIL, "Email is invalid", @proposed_org)
+    end
     org = @proposed_org.accept_proposal
     usr = User.find_by(email: @email)
     if usr

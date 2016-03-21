@@ -542,7 +542,7 @@ end
 Given /^"(.*?)" has a whitespace at the end of the email address$/ do |org_name|
   org = Organisation.find_by_name(org_name)
   org.email += ' '
-  org.save
+  org.save!(validate: false)
 end
 
 Given /^associations are destroyed for:$/ do |table|
@@ -550,9 +550,9 @@ Given /^associations are destroyed for:$/ do |table|
     org = Organisation.find_by_name org_name
     user = org.users.last
     org.users = org.users[0..-2]
-    org.save
+    org.save!(validate: false)
     user.organisation_id = nil
-    user.save
+    user.save!(validate: false)
   end
 end
 
